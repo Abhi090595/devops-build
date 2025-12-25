@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        
         DEV_REPO  = "a516/devops-build-dev"
         PROD_REPO = "a516/devops-build-prod"
 
@@ -40,7 +39,7 @@ pipeline {
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
-                    sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+                    sh "echo \$DOCKER_PASS | docker login --username \$DOCKER_USER --password-stdin"
                 }
 
                 script {
@@ -57,7 +56,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 script {
-                     sh "chmod +x deploy.sh"
+                    sh "chmod +x deploy.sh"
                     if (env.BRANCH_NAME == "dev") {
                         sh "./deploy.sh dev"
                     }
