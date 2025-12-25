@@ -57,6 +57,7 @@ pipeline {
         stage('Deploy Application') {
             steps {
                 script {
+                     sh "chmod +x deploy.sh"
                     if (env.BRANCH_NAME == "dev") {
                         sh "./deploy.sh dev"
                     }
