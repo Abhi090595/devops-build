@@ -1,36 +1,27 @@
 #!/bin/bash
 
-# Configuration
-IMAGE_NAME="devops-build"
+IMAGE_NAME="a516/devops-build-dev"
 TAG="latest"
 CONTAINER_NAME="react_container"
 HOST_PORT=80
 CONTAINER_PORT=80
 
-echo " Checking existing container..."
+echo "Checking existing container..."
 
-# Stop and remove existing container if it exists
-if [ "$(docker ps -aq -f name=react_container)" ]; then
-  echo " Stopping existing container..."
-  docker stop react_container
+docker stop react_container 2>/dev/null || true
+docker rm react_container 2>/dev/null || true
 
-  echo " Removing existing container..."
-  docker rm react_container
-fi
+echo "Pulling latest image..."
+docker pull a516/devops-build-dev:latest || exit 1
 
-echo " Deploying new container..."
+echo "Deploying new container..."
 
 docker run -d \
   --name react_container \
   -p 80:80 \
   --restart always \
-  a516/devops-build:latest
+  a516/devops-build-dev:latest || exit 1
 
-# Check deployment status
-if [ $? -eq 0 ]; then
-  echo "Deployment successful"
-  echo "Application is running on http://localhost:80"
-else
-  echo "Deployment failed"
-  exit 1
-fi
+echo "Deployment successful"
+echo "Application running on port 80"
+exit 0
