@@ -22,9 +22,9 @@ echo " Deploying new container..."
 
 docker run -d \
   --name react_container \
-  -p 80:80 \
+  -p 81:80 \
   --restart always \
-  a516/devops-build:latest
+  a516/devops-build-prod:latest
 
 # Check deployment status
 if [ $? -eq 0 ]; then
