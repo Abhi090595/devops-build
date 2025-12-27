@@ -27,7 +27,7 @@ pipeline {
                         sh "docker build -t devops-build-dev:latest ."
                     }
                     if (env.BRANCH_NAME == "main") {
-                        sh "docker build -t devops-build-prod:latest ."
+                        sh "docker build -t a516/devops-build-prod:latest ."
                     }
                 }
             }
