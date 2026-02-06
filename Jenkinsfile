@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t devops-build-react-app:latest .'
+                sh 'docker build -t devops-build-prod:latest .'
             }
         }
 
@@ -34,8 +34,8 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag $IMAGE_NAME:latest $DOCKER_USER/$DEV_REPO:latest
-                    docker push $DOCKER_USER/$DEV_REPO:latest
+                    docker tag devops-build:latest a516/devops-build-dev:latest
+                    docker push a516/devops-build-dev:latest
                     '''
                 }
             }
@@ -53,8 +53,8 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag $IMAGE_NAME:latest $DOCKER_USER/$PROD_REPO:latest
-                    docker push $DOCKER_USER/$PROD_REPO:latest
+                    docker tag devops-build:latest a516/devops-build-prod:latest
+                    docker push a516/docker-build-prod:latest
                     '''
                 }
             }
