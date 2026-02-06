@@ -34,7 +34,7 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag devops-build:latest a516/devops-build-dev:latest
+                    docker tag devops-build-react-app:latest a516/devops-build-dev:latest
                     docker push a516/devops-build-dev:latest
                     '''
                 }
