@@ -62,11 +62,11 @@ pipeline {
 
         stage('Deploy (PROD only)') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 sh '''
-                docker pull $DOCKER_USER/$PROD_REPO:latest
+                docker pull a516/devops-build-prod:latest
                 docker-compose down
                 docker-compose up -d
                 '''
