@@ -43,7 +43,7 @@ pipeline {
 
         stage('Push to PROD DockerHub') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 withCredentials([usernamePassword(
@@ -53,7 +53,7 @@ pipeline {
                 )]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                    docker tag devops-build:latest a516/devops-build-prod:latest
+                    docker tag devops-build-react-app:latest a516/devops-build-prod:latest
                     docker push a516/docker-build-prod:latest
                     '''
                 }
