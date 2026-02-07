@@ -52,7 +52,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-                    echo dckr_pat_jM8Me5H9lX9EzHrx_h1HW6Qz4Tc | docker login -u 516 --password-stdin
+                    echo $DOCKER_PASS | docker login -u a516 --password-stdin
                     docker tag devops-build-react-app:latest a516/devops-build-prod:latest
                     docker push a516/devops-build-prod:latest
                     '''
