@@ -52,7 +52,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-                    echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                    echo dckr_pat_jM8Me5H9lX9EzHrx_h1HW6Qz4Tc | docker login -u a516 --password-stdin
                     docker tag devops-build-react-app:latest a516/devops-build-prod:latest
                     docker push a516/devops-build-prod:latest
                     '''
@@ -67,8 +67,8 @@ pipeline {
             steps {
                 sh '''
                 docker pull a516/devops-build-prod:latest
-                docker-compose down
-                docker-compose up -d
+                /usr/bin/docker-compose down
+                /usr/bin/docker-compose up -d
                 '''
             }
         }
