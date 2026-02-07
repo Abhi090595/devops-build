@@ -67,8 +67,8 @@ pipeline {
             steps {
                 sh '''
                 docker pull a516/devops-build-prod:latest
-                docker-compose down
-                docker-compose up -d
+                /usr/bin/docker-compose down
+                /usr/bin/docker-compose up -d
                 '''
             }
         }
